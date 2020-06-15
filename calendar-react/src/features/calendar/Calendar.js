@@ -1,4 +1,5 @@
 import React from 'react'
+import './Calendar.css'
 // import moment from 'moment'
 
 function adjustedMonth(month) {

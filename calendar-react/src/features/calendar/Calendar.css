@@ -1,0 +1,30 @@
+.calendar-box {
+  position: relative;
+  width: 600px;
+  padding: 70px 25px;
+  width: 100%;
+  background: #fff388b7;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: 0 5px 50px rgba(#000, 0.5);
+}
+
+.calendar-header {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 20px;
+}
+
+.calendar-dates {
+  display: flex;
+  flex-flow: wrap;
+  font-size: 0;
+}
+
+.calendar-day {
+  flex: 1;
+  min-width: 14.2857%;
+  max-width: 14.2857vw;
+  position: relative;
+  font-size: 1.8vw;
+  /* line-height: 0; */
+}
