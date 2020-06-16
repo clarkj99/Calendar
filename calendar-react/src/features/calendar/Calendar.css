@@ -1,52 +1,124 @@
-.calendar-box {
-  flex: 1;
-  position: relative;
-  padding: 70px 25px;
-  margin: 10px;
-  background: #fff388b7;
-  text-align: center;
+.html {
+  font-size: 0.8em;
+}
+.body {
+  font-size: 0.8em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.section {
+  display: flex;
   box-sizing: border-box;
-  box-shadow: 0 5px 50px;
+}
+
+@media (max-width: 600) {
+  .section {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+}
+
+.calendar-box {
+  flex: 2;
+  padding: 25px;
+  text-align: center;
 }
 
 .calendar-header {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 20px;
-  width: 100%;
-}
-.calendar-header span {
-  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .calendar-title {
-  text-align: left;
+  font-size: 2rem;
+}
+.calendar-months {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-size: 1.2rem;
 }
 
-.calendar_year {
-  text-align: right;
-}
-
-.calendar-header span {
-  flex: 2;
+.calendar-months span {
+  padding: 30px;
 }
 
 .calendar-dates,
 .calendar-days {
   display: flex;
   flex-flow: wrap;
-  font-size: 1.1em;
+  font-size: 1.1rem;
+  text-transform: uppercase;
 }
 
 .calendar-dates > span,
 .calendar-days > span {
-  flex: 1;
   min-width: 14.2857%;
   max-width: 14.2857vw;
   position: relative;
-  font-size: 1.2rem;
-  /* line-height: 0; */
+  font-size: 0.8rem;
+  padding: 10px 0;
+}
+
+.inactive-day,
+.inactive-month {
+  color: #ccc;
 }
 
 .inactive-month {
-  color: #ccc;
+  font-size: 0.8rem;
+}
+
+.divider-line {
+}
+
+.event-box {
+  background-image: linear-gradient(
+      rgba(224, 224, 240, 0.5),
+      rgba(0, 4, 255, 0.5)
+    ),
+    url("./images/sean-o-KMn4VEeEPR8-unsplash.jpg");
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  margin: 10px;
+  background-position: center;
+}
+
+.event-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.event-details {
+  flex: 1;
+  padding: 10px;
+  margin: 10px;
+  display: flex;
+}
+
+.vl {
+  border-left: 3px solid white;
+  border-left-color: #fff;
+  flex: 1;
+  width: 1px;
+  height: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+}
+
+.list {
+  flex: 9;
+  padding: 10px;
+  /* margin: 10px; */
+  border-radius: 5px;
+  color: #fff;
+  background-color: #00000080;
+  text-align: left;
 }

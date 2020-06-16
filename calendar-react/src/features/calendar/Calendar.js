@@ -6,7 +6,8 @@ function adjustedMonth(month) {
     if (month < 0)
         month += 12
     else if (month > 11)
-        return month
+        month -= 12
+    return month
 }
 
 function calendarDays(day) {
@@ -34,29 +35,49 @@ function calendarDaysJS(day) {
 
 export function Calendar() {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const fullDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const today = new Date();
     const month = today.getMonth();
+    const date = today.getDate();
+    const weekday = today.getDay();
 
     // const day = moment()
 
     return (
-        <div className='calendar-box'>
-            <div className="calendar-header">
-                <span className="calendar-title">eCalendar</span>
-                <span className="calendar-year">{today.getFullYear()}</span>
+        <div className="section">
+            <div className='calendar-box'>
+                <div className="calendar-header">
+                    <span className="calendar-title">eCalendar</span>
+                    <span className="calendar-year">{today.getFullYear()}</span>
+                </div>
+                <div className="calendar-months">
+                    <span className="inactive-month">{months[adjustedMonth(today.getMonth() - 1)]}</span>
+                    <span>{months[today.getMonth()]}</span>
+                    <span className="inactive-month">{months[adjustedMonth(today.getMonth() + 1)]}</span>
+                </div>
+                <div className="divider-line">
+                    <hr />
+                </div>
+                <div className="calendar-days">
+                    {days.map(day => <span key={day}>{day}</span>)}
+                </div>
+                <div className="calendar-dates">
+                    {calendarDaysJS(today).map(item => <span key={item.day} className={item.month == month ? "active-day" : "inactive-day"}>{item.day}</span>)}
+                </div>
             </div>
-            <span>{months[adjustedMonth(today.getMonth() - 1)]}</span>
-            <span>{months[today.getMonth()]}</span>
-            <span>{months[adjustedMonth(today.getMonth() + 1)]}</span>
+            <div className="event-box">
+                <div className="event-date"><span>{fullDays[weekday]}</span> <span>{fullMonths[month]} {date}</span></div>
 
-            <div className="calendar-days">
-                {days.map(day => <span key={day}>{day}</span>)}
-            </div>
-            <div className="divider-line">
-            </div>
-            <div className="calendar-dates">
-                {calendarDaysJS(today).map(item => <span key={item.day} className={item.month == month ? "active-month" : "inactive-month"}>{item.day}</span>)}
+                <div className="event-details">
+                    <div className="vl"></div>
+                    <div className="list">
+                        <div>10:30 Goat Yoga</div>
+                        <div>10:30 Goat Yoga</div>
+                        <div>10:30 Goat Yoga</div>
+                    </div>
+                </div>
             </div>
         </div>
     )
