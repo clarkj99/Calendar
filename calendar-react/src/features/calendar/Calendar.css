@@ -1,17 +1,20 @@
-.html {
-  font-size: 0.8em;
+:root {
+  --main-font-size: 1em;
+  --larger-font-size: 1.2rem;
+  --smaller-font-size: 0.8rem;
 }
-.body {
-  font-size: 0.8em;
+
+body {
   font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--main-font-size);
 }
 
 .section {
   display: flex;
-  box-sizing: border-box;
+  box-sizing: content-box;
 }
 
-@media (max-width: 600) {
+@media (max-width: 600px) {
   .section {
     display: flex;
     flex-direction: column;
@@ -21,7 +24,7 @@
 
 .calendar-box {
   flex: 2;
-  padding: 25px;
+  padding: 10px 0px 0;
   text-align: center;
 }
 
@@ -38,19 +41,20 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  font-size: 1.2rem;
+  font-size: var(--larger-font-size);
 }
 
 .calendar-months span {
-  padding: 30px;
+  padding: 20px;
 }
 
 .calendar-dates,
 .calendar-days {
   display: flex;
   flex-flow: wrap;
-  font-size: 1.1rem;
+  /* font-size: var(--main-font-size); */
   text-transform: uppercase;
+  align-items: center;
 }
 
 .calendar-dates > span,
@@ -58,7 +62,7 @@
   min-width: 14.2857%;
   max-width: 14.2857vw;
   position: relative;
-  font-size: 0.8rem;
+  font-size: var(--smaller-font-size);
   padding: 10px 0;
 }
 
@@ -68,27 +72,36 @@
 }
 
 .inactive-month {
-  font-size: 0.8rem;
+  font-size: var(--smaller-font-size);
 }
 
-.divider-line hr {
+span.active-day.current {
+  font-weight: bold;
+  font-size: var(--larger-font-size);
+}
+
+.h-line hr {
   height: 2px;
   border-width: 0;
   /* color: #000; */
   background-color: #000;
 }
 
+.h-line {
+  padding: 0 10px;
+}
+
 .event-box {
   background-image: linear-gradient(
-      rgba(224, 224, 240, 0.5),
-      rgba(0, 4, 255, 0.5)
+      rgba(255, 255, 255, 0.5),
+      rgba(0, 0, 0, 0.5)
     ),
     url("./images/sean-o-KMn4VEeEPR8-unsplash.jpg");
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 20px;
-  margin: 10px;
+  margin: 0;
   background-position: center;
 }
 
@@ -96,6 +109,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  /* font-size: var(--main-font-size); */
 }
 
 .event-date span:last-child {
@@ -103,14 +117,15 @@
 }
 
 .event-details {
-  font-size: 0.8rem;
+  font-size: var(--smaller-font-size);
+
   flex: 1;
   padding: 10px;
   margin: 10px 0 0 0;
   display: flex;
 }
 
-.vl {
+.v-line {
   border-left: 3px solid white;
   border-left-color: #fff;
   flex: 1;
@@ -135,9 +150,21 @@
 .calendar-controls {
   display: flex;
   align-items: center;
+  padding: 0 5px;
+}
+.calendar-arrow {
+  flex: 1;
+  font-size: var(--larger-font-size);
 }
 
-.calendar-arrow,
+.calendar-arrow:first-child {
+  transform: rotate(180deg);
+}
+
+.calendar-body {
+  flex: 14;
+}
+
 .event-create {
   font-size: 2rem;
 }
@@ -145,7 +172,59 @@
   color: #fff;
 }
 .event-signin {
+  font-size: var(--main-font-size);
   text-align: right;
   margin: 0 0 10px 0;
   text-transform: lowercase;
+}
+
+.modal-active,
+.modal-inactive {
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modal-active {
+  display: block;
+}
+
+.modal-inactive {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
