@@ -71,7 +71,11 @@
   font-size: 0.8rem;
 }
 
-.divider-line {
+.divider-line hr {
+  height: 2px;
+  border-width: 0;
+  /* color: #000; */
+  background-color: #000;
 }
 
 .event-box {
@@ -94,10 +98,15 @@
   align-items: flex-start;
 }
 
+.event-date span:last-child {
+  text-transform: uppercase;
+}
+
 .event-details {
+  font-size: 0.8rem;
   flex: 1;
   padding: 10px;
-  margin: 10px;
+  margin: 10px 0 0 0;
   display: flex;
 }
 
@@ -121,4 +130,22 @@
   color: #fff;
   background-color: #00000080;
   text-align: left;
+}
+
+.calendar-controls {
+  display: flex;
+  align-items: center;
+}
+
+.calendar-arrow,
+.event-create {
+  font-size: 2rem;
+}
+.event-create {
+  color: #fff;
+}
+.event-signin {
+  text-align: right;
+  margin: 0 0 10px 0;
+  text-transform: lowercase;
 }

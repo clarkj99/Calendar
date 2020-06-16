@@ -60,14 +60,21 @@ export function Calendar() {
                 <div className="divider-line">
                     <hr />
                 </div>
-                <div className="calendar-days">
-                    {days.map(day => <span key={day}>{day}</span>)}
-                </div>
-                <div className="calendar-dates">
-                    {calendarDaysJS(today).map(item => <span key={item.day} className={item.month == month ? "active-day" : "inactive-day"}>{item.day}</span>)}
+                <div className="calendar-controls">
+                    <div className="calendar-arrow"> {String.fromCharCode(8592)} </div>
+                    <div>
+                        <div className="calendar-days">
+                            {days.map(day => <span key={day}>{day}</span>)}
+                        </div>
+                        <div className="calendar-dates">
+                            {calendarDaysJS(today).map(item => <span key={item.day} className={item.month == month ? "active-day" : "inactive-day"}>{item.day}</span>)}
+                        </div>
+                    </div>
+                    <div className="calendar-arrow">{String.fromCharCode(8594)}</div>
                 </div>
             </div>
             <div className="event-box">
+                <div className="event-signin">Sign In</div>
                 <div className="event-date"><span>{fullDays[weekday]}</span> <span>{fullMonths[month]} {date}</span></div>
 
                 <div className="event-details">
@@ -78,6 +85,7 @@ export function Calendar() {
                         <div>10:30 Goat Yoga</div>
                     </div>
                 </div>
+                <div className="event-create">+</div>
             </div>
         </div>
     )
