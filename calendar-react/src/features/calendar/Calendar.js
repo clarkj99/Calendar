@@ -24,7 +24,7 @@ function calendarDaysJS(day) {
 function dateClass(item, month, today) {
     let className = item.month === month ? "active-day" : "inactive-day"
 
-    if (item.day === today.getDate() && item.month === today.getMonth() && item.yesr === today.getYear()) {
+    if (item.day === today.getDate() && item.month === today.getMonth() && item.year === today.getYear()) {
         className += " current"
     }
     return className
@@ -93,6 +93,12 @@ const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const fullDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+const sampleEvents = [
+    { title: "Goat yoga", startTime: new Date('2009-06-03T10:00:00'), people: "Soren", location: "The Office", description: "I'm not sure what's happening, but I like it." },
+    { title: "Goat yoga", startTime: new Date('2009-06-03T10:00:00'), people: "Soren", location: "The Office", description: "I'm not sure what's happening, but I like it." },
+    { title: "Goat yoga", startTime: new Date('2009-06-03T10:00:00'), people: "Soren", location: "The Office", description: "I'm not sure what's happening, but I like it." }
+]
+
 export function Calendar() {
     const today = new Date();
 
@@ -101,7 +107,7 @@ export function Calendar() {
 
     const month = dateForMonth.getMonth();
     const date = today.getDate();
-    const weekday = dateForMonth.getDay();
+    // const weekday = dateForMonth.getDay();
 
     return (
         <div className="section">
@@ -133,7 +139,7 @@ export function Calendar() {
             </div>
             <div className="event-box">
                 <div className="event-signin text-button">Sign In</div>
-                <div className="event-date"><span>{fullDays[weekday]}</span> <span>{fullMonths[month]} {date}</span></div>
+                <div className="event-date"><span>{fullDays[today.getDay()]}</span> <span>{fullMonths[today.getMonth()]} {date}</span></div>
 
                 <div className="event-details">
                     <div className="v-line"></div>
