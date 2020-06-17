@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import './Calendar.css'
 
 function adjustedMonth(month) {
@@ -29,16 +29,56 @@ function dateClass(item, month, today) {
     return dateClass
 }
 
-function eventModal() {
+function eventModal(modalActive, setModalActive) {
     return (
-        <div id="myModal" class="modal-inactive">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
+        <div id="eventModal" className={"modal-active"}>
+            <div className="modal-content">
+
+                <span className="close" onClick={() => toggleModal(modalActive, setModalActive)}>&times;</span>
+                <div className="modal-form">
+                    <span className="modal-title">New Event</span>
+                    <form >
+
+                        <div><label>Title:</label>
+                            <input type="text" name="title" />
+
+                        </div>
+                        <div>
+                            <label>Start Date: </label>
+                            <input type="text" name="title" />
+
+                        </div>
+                        <div><label>Begins:  </label>
+                            <input type="text" name="begins" />
+
+                        </div>
+                        <div><label>People:</label>
+                            <input type="text" name="people" />
+
+                        </div>
+                        <div><label>Location:</label>
+                            <input type="text" name="location" />
+
+                        </div>
+                        <div><label>Description: </label>
+                            <input type="text" name="description" />
+
+                        </div>
+                        <button>Add Event</button>
+                    </form>
+                </div>
             </div>
 
         </div>
     )
+}
+
+const toggleModal = (modalActive, setModalActive) => {
+    setModalActive(!modalActive)
+}
+
+const changeMonth = (month) => {
+    alert(month)
 }
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -50,7 +90,7 @@ const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const fullDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 export function Calendar() {
-
+    const [modalActive, setModalActive] = useState(true);
     const today = new Date();
     const month = today.getMonth();
     const date = today.getDate();
@@ -72,7 +112,7 @@ export function Calendar() {
                     <hr />
                 </div>
                 <div className="calendar-controls">
-                    <div className="calendar-arrow"> {String.fromCharCode(10132)} </div>
+                    <span className="calendar-arrow" onClick={() => changeMonth(0)}> {String.fromCharCode(10132)} </span>
                     <div className="calendar-body">
                         <div className="calendar-days">
                             {days.map(day => <span key={day}>{day}</span>)}
@@ -81,7 +121,7 @@ export function Calendar() {
                             {calendarDaysJS(today).map(item => <span key={item.month + ' ' + item.day} className={dateClass(item, month, date)}>{item.day}</span>)}
                         </div>
                     </div>
-                    <div className="calendar-arrow">{String.fromCharCode(10132)}</div>
+                    <span className="calendar-arrow" onClick={() => changeMonth(1)}>{String.fromCharCode(10132)}</span>
                 </div>
             </div>
             <div className="event-box">
@@ -96,9 +136,9 @@ export function Calendar() {
                         <div>10:30 Goat Yoga</div>
                     </div>
                 </div>
-                <button className="event-create">+</button>
+                <div className="event-create" onClick={() => toggleModal(modalActive, setModalActive)}>+</div>
             </div>
-            {eventModal()}
+            {modalActive && eventModal(modalActive, setModalActive)}
         </div>
     )
 }
