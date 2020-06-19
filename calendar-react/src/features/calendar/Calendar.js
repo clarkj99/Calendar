@@ -178,25 +178,25 @@ export function Calendar() {
                             {days.map(day => <span key={day}>{day}</span>)}
                         </div>
                         <div className="calendar-dates">
-                            {calendarDaysJS(dateForMonth).map(item => <span key={item.month + ' ' + item.day} className={dateClass(item, month, today, events) onClick={}}>{item.day}</span>)}
+                            {calendarDaysJS(dateForMonth).map(item => <span key={item.month + ' ' + item.day} className={dateClass(item, month, today, events)}>{item.day}</span>)}
                         </div>
+                    </div>
+                    <span className="calendar-arrow text-button" onClick={() => changeMonth(1, dateForMonth, setDateforMonth)}>{String.fromCharCode(10132)}</span>
                 </div>
-                <span className="calendar-arrow text-button" onClick={() => changeMonth(1, dateForMonth, setDateforMonth)}>{String.fromCharCode(10132)}</span>
             </div>
-        </div>
-        <div className="event-box">
-            <div className="event-signin text-button">Sign In</div>
-            <div className="event-date"><span>{today.toLocaleDateString([], { weekday: 'long' })}</span> <span>{today.toLocaleDateString([], { month: 'long' })} {date}</span></div>
+            <div className="event-box">
+                <div className="event-signin text-button">Sign In</div>
+                <div className="event-date"><span>{today.toLocaleDateString([], { weekday: 'long' })}</span> <span>{today.toLocaleDateString([], { month: 'long' })} {date}</span></div>
 
-            <div className="event-details">
-                <div className="v-line"></div>
-                <div className="list">
-                    {events.map((event, i) => <div key={i}>{event.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} {event.title}</div>)}
+                <div className="event-details">
+                    <div className="v-line"></div>
+                    <div className="list">
+                        {events.map((event, i) => <div key={i}>{event.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} {event.title}</div>)}
+                    </div>
                 </div>
+                <div className="event-create text-button" onClick={() => toggleModal(modalActive, setModalActive)}>+</div>
             </div>
-            <div className="event-create text-button" onClick={() => toggleModal(modalActive, setModalActive)}>+</div>
-        </div>
-            { modalActive && eventModal(modalActive, setModalActive) }
+            {modalActive && eventModal(modalActive, setModalActive)}
         </div >
     )
 }
