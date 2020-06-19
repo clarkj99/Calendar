@@ -72,8 +72,11 @@ body {
   position: relative;
   font-size: var(--smaller-font-size);
   padding: 10px 0;
+  margin: 0px;
 }
-
+.calendar-dates > span:hover {
+  background-color: #ccc;
+}
 .inactive-day,
 .inactive-month {
   color: var(--inactive);
@@ -85,9 +88,12 @@ body {
 
 span.active-day.current {
   font-weight: bold;
-  font-size: var(--larger-font-size);
+  /* font-size: var(--main-font-size); */
+  color: var(--highlight);
 }
-
+.calendar-dates > span.events {
+  background-color: var(--secondary);
+}
 .h-line hr {
   height: 2px;
   border-width: 0;
