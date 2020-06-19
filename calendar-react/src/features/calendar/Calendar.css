@@ -5,6 +5,7 @@
   --largest-font-size: 2rem;
   --primary: #26547c;
   --secondary: #ff9300;
+  --hover: #ffcf8b;
   --white: #fcfcfc;
   --highlight: #ef476f;
   --green: #06d6a0;
@@ -74,9 +75,16 @@ body {
   padding: 10px 0;
   margin: 0px;
 }
-.calendar-dates > span:hover {
-  background-color: #ccc;
+
+.calendar-dates > span.selected {
+  background-color: var(--primary);
+  color: var(--white);
 }
+
+.calendar-dates > span:hover {
+  background-color: var(--hover);
+}
+
 .inactive-day,
 .inactive-month {
   color: var(--inactive);
@@ -91,8 +99,9 @@ span.active-day.current {
   /* font-size: var(--main-font-size); */
   color: var(--highlight);
 }
-.calendar-dates > span.events {
+span.events {
   background-color: var(--secondary);
+  color: var(--white);
 }
 .h-line hr {
   height: 2px;

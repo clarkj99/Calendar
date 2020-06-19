@@ -9,27 +9,31 @@ function adjustedMonth(month) {
     return month
 }
 
-function calendarDaysJS(day) {
+function calendarDaysJS(dateForMonth) {
     const days = []
-    const tempDate = new Date(day.getTime())
+    const tempDate = new Date(dateForMonth.getTime())
     tempDate.setDate(1)
     tempDate.setDate(1 - tempDate.getDay())
     for (let i = 1; i <= 42; i++) {
-        days[i] = { day: tempDate.getDate(), month: tempDate.getMonth(), year: tempDate.getYear() }
+        days[i] = { day: tempDate.getDate(), month: tempDate.getMonth(), year: tempDate.getFullYear() }
         tempDate.setDate(tempDate.getDate() + 1)
     }
     return days
 }
 
-function dateClass(item, month, today, events) {
+function dateClass(item, month, today, events, selectedDate) {
     let className = item.month === month ? "active-day" : "inactive-day"
 
-    if (item.day === today.getDate() && item.month === today.getMonth() && item.year === today.getYear()) {
+    if (item.day === today.getDate() && item.month === today.getMonth() && item.year === today.getFullYear()) {
         className += " current"
     }
 
     if (events.find(event => item.day === event.startTime.getDate() && item.month === event.startTime.getMonth())) {
         className += " events"
+    }
+
+    if (item.day === selectedDate.getDate() && item.month === selectedDate.getMonth() && item.year === selectedDate.getFullYear()) {
+        className += " selected"
     }
 
     return className
@@ -103,59 +107,56 @@ const sampleEvents = [
     { title: "Tee time", startTime: new Date(Date.UTC(2020, 4, 18, 18, 30, 0)), people: "Marge", location: "The Office", description: "I'm not sure what's happening, but I like it." }
 ]
 
-const useEventForm = (callback) => {
-    const [inputs, setInputs] = useState({});
+// const useEventForm = (callback) => {
+//     const [inputs, setInputs] = useState({});
 
-    const handleSubmit = (event) => {
-        if (event) {
-            event.preventDefault();
-        }
-        callback();
-    }
+//     const handleSubmit = (event) => {
+//         if (event) {
+//             event.preventDefault();
+//         }
+//         callback();
+//     }
 
-    const handleInputChange = (event) => {
-        event.persist();
-        setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
-    }
+//     const handleInputChange = (event) => {
+//         event.persist();
+//         setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
+//     }
 
-    return {
-        handleSubmit,
-        handleInputChange,
-        inputs
-    };
-}
+//     return {
+//         handleSubmit,
+//         handleInputChange,
+//         inputs
+//     };
+// }
 
-const useInput = initialValue => {
-    const [value, setValue] = useState(initialValue);
+// const useInput = initialValue => {
+//     const [value, setValue] = useState(initialValue);
 
-    return {
-        value,
-        setValue,
-        reset: () => setValue(""),
-        bind: {
-            value,
-            onChange: event => {
-                setValue(event.target.value);
-            }
-        }
-    };
-};
+//     return {
+//         value,
+//         setValue,
+//         reset: () => setValue(""),
+//         bind: {
+//             value,
+//             onChange: event => {
+//                 setValue(event.target.value);
+//             }
+//         }
+//     };
+// };
 
 export function Calendar() {
     const today = new Date();
 
     const [modalActive, setModalActive] = useState(false);
-    const [dateForMonth, setDateforMonth] = useState(new Date(today.getTime()))
+    const [dateForMonth, setDateForMonth] = useState(new Date(today.getTime()))
     const [selectedDate, setSelectedDate] = useState(new Date(today.getTime()))
+
     const events = sampleEvents.filter(event => event.startTime.toLocaleDateString([], { year: 'numeric', month: '2-digit' }) === dateForMonth.toLocaleDateString([], { year: 'numeric', month: '2-digit' }))
 
-    console.log('date', dateForMonth.toLocaleDateString([], { year: 'numeric', month: '2-digit' }));
-    console.log('dateForMonth', dateForMonth);
-    console.log(events);
-
+    const selectedDayEvents = events.filter(event => event.startTime.toLocaleDateString() === selectedDate.toLocaleDateString())
     const month = dateForMonth.getMonth();
-    const date = today.getDate();
-    const { value, bind, reset } = useInput('');
+    // const { value, bind, reset } = useInput('');
     return (
         <div className="section">
             <div className='calendar-box'>
@@ -172,26 +173,26 @@ export function Calendar() {
                     <hr />
                 </div>
                 <div className="calendar-controls">
-                    <span className="calendar-arrow text-button" onClick={() => changeMonth(-1, dateForMonth, setDateforMonth)}> {String.fromCharCode(10132)} </span>
+                    <span className="calendar-arrow text-button" onClick={() => changeMonth(-1, dateForMonth, setDateForMonth)}> {String.fromCharCode(10132)} </span>
                     <div className="calendar-body">
                         <div className="calendar-days">
                             {days.map(day => <span key={day}>{day}</span>)}
                         </div>
                         <div className="calendar-dates">
-                            {calendarDaysJS(dateForMonth).map(item => <span key={item.month + ' ' + item.day} className={dateClass(item, month, today, events)}>{item.day}</span>)}
+                            {calendarDaysJS(dateForMonth).map(item => <span key={item.month + ' ' + item.day} className={dateClass(item, month, today, events, selectedDate)} onClick={() => setSelectedDate(new Date(item.year, item.month, item.day))}>{item.day}</span>)}
                         </div>
                     </div>
-                    <span className="calendar-arrow text-button" onClick={() => changeMonth(1, dateForMonth, setDateforMonth)}>{String.fromCharCode(10132)}</span>
+                    <span className="calendar-arrow text-button" onClick={() => changeMonth(1, dateForMonth, setDateForMonth)}>{String.fromCharCode(10132)}</span>
                 </div>
             </div>
             <div className="event-box">
                 <div className="event-signin text-button">Sign In</div>
-                <div className="event-date"><span>{today.toLocaleDateString([], { weekday: 'long' })}</span> <span>{today.toLocaleDateString([], { month: 'long' })} {date}</span></div>
+                <div className="event-date"><span>{selectedDate.toLocaleDateString(['us'], { weekday: 'long' })}</span> <span>{selectedDate.toLocaleDateString([], { month: 'long' })} {selectedDate.getDate()}</span></div>
 
                 <div className="event-details">
                     <div className="v-line"></div>
                     <div className="list">
-                        {events.map((event, i) => <div key={i}>{event.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} {event.title}</div>)}
+                        {selectedDayEvents.length ? selectedDayEvents.map((event, i) => <div key={i}>{event.startTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} {event.title}</div>) : <div>No events for this date</div>}
                     </div>
                 </div>
                 <div className="event-create text-button" onClick={() => toggleModal(modalActive, setModalActive)}>+</div>
