@@ -104,7 +104,8 @@ function eventModal(modalActive, setModalActive) {
 const sampleEvents = [
     { title: "Goat yoga", startTime: new Date(Date.UTC(2020, 5, 9, 14, 0, 0)), people: "Soren", location: "The Office", description: "I'm not sure what's happening, but I like it." },
     { title: "Dental Cleaning", startTime: new Date(Date.UTC(2020, 5, 14, 16, 0, 0)), people: "Adele", location: "The Office", description: "I'm not sure what's happening, but I like it." },
-    { title: "Tee time", startTime: new Date(Date.UTC(2020, 4, 18, 18, 30, 0)), people: "Marge", location: "The Office", description: "I'm not sure what's happening, but I like it." }
+    { title: "Tee time", startTime: new Date(Date.UTC(2020, 4, 18, 11, 30, 0)), people: "Marge", location: "The Office", description: "I'm not sure what's happening, but I like it." },
+    { title: "Meet with plumber", startTime: new Date(Date.UTC(2020, 4, 18, 18, 0, 0)), people: "Sam", location: "The Office", description: "I'm not sure what's happening, but I like it." }, { title: "Date with Adele", startTime: new Date(Date.UTC(2020, 4, 18, 23, 30, 0)), people: "Michael", location: "The Office", description: "I'm not sure what's happening, but I like it." }
 ]
 
 // const useEventForm = (callback) => {
@@ -157,6 +158,7 @@ export function Calendar() {
     const selectedDayEvents = events.filter(event => event.startTime.toLocaleDateString() === selectedDate.toLocaleDateString())
     const month = dateForMonth.getMonth();
     // const { value, bind, reset } = useInput('');
+
     return (
         <div className="section">
             <div className='calendar-box'>
@@ -179,7 +181,10 @@ export function Calendar() {
                             {days.map(day => <span key={day}>{day}</span>)}
                         </div>
                         <div className="calendar-dates">
-                            {calendarDaysJS(dateForMonth).map(item => <span key={item.month + ' ' + item.day} className={dateClass(item, month, today, events, selectedDate)} onClick={() => setSelectedDate(new Date(item.year, item.month, item.day))}>{item.day}</span>)}
+                            {calendarDaysJS(dateForMonth).map(item => <div key={item.month + ' ' + item.day} className={dateClass(item, month, today, events, selectedDate)} onClick={() => setSelectedDate(new Date(item.year, item.month, item.day))}>
+                                <span>{item.day}</span>
+                                <span></span>
+                            </div>)}
                         </div>
                     </div>
                     <span className="calendar-arrow text-button" onClick={() => changeMonth(1, dateForMonth, setDateForMonth)}>{String.fromCharCode(10132)}</span>

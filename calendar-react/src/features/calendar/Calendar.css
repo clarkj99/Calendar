@@ -20,13 +20,21 @@ body {
 .section {
   display: flex;
   box-sizing: content-box;
+  height: 100vh;
+  width: 100vw;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 559px) {
   .section {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+  }
+}
+
+@media (min-width: 600px) {
+  .calendar-dates > div {
+    min-height: 8vh;
   }
 }
 
@@ -66,22 +74,31 @@ body {
   align-items: center;
 }
 
-.calendar-dates > span,
+.calendar-dates > div,
 .calendar-days > span {
   min-width: 14.2857%;
   max-width: 14.2857vw;
   position: relative;
   font-size: var(--smaller-font-size);
-  padding: 10px 0;
+  /* padding: 5px 0; */
   margin: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.calendar-dates > span.selected {
+.calendar-dates > div > span:first-child {
+  flex: 1;
+  padding: 1 5px 0;
+  margin: 5px;
+}
+
+.calendar-dates > div.selected {
   background-color: var(--primary);
   color: var(--white);
 }
 
-.calendar-dates > span:hover {
+.calendar-dates > div:hover {
   background-color: var(--hover);
 }
 
@@ -94,15 +111,28 @@ body {
   font-size: var(--smaller-font-size);
 }
 
-span.active-day.current {
+div.active-day.current {
   font-weight: bold;
   /* font-size: var(--main-font-size); */
   color: var(--highlight);
 }
-span.events {
+div.events > span:first-child {
   background-color: var(--secondary);
   color: var(--white);
+
+  border-radius: 10px;
 }
+
+/* div.events > span:last-child {
+  position: absolute;
+  top: 0px;
+  right: 40%;
+  padding: 5px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+} */
+
 .h-line hr {
   height: 2px;
   border-width: 0;
@@ -216,7 +246,7 @@ span.events {
 .modal-content {
   max-width: 420px;
   background-color: var(--white);
-  margin: 15px auto;
+  margin: 15% auto;
   padding: 20px;
   width: 80%; /* Could be more or less, depending on screen size */
   border-radius: 5px;
