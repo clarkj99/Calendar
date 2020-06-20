@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Counter } from './features/counter/Counter';
-import { Calendar } from './features/calendar/Calendar'
+import { Calendar } from './components/Calendar'
 import './App.css';
 
 function App() {

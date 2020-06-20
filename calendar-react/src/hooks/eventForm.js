@@ -1,0 +1,27 @@
+import { useState } from 'react';
+
+const useEventForm = (updateState) => {
+    const initialState = { title: "", startTime: "", startDate: "" }
+    const [inputs, setInputs] = useState({ ...initialState });
+
+    const handleSubmit = (event) => {
+        if (event) {
+            event.preventDefault();
+        }
+        updateState();
+        setInputs({ ...initialState })
+    }
+
+    const handleInputChange = (event) => {
+        event.persist();
+        setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
+    }
+
+    return {
+        handleSubmit,
+        handleInputChange,
+        inputs
+    };
+}
+
+export default useEventForm;

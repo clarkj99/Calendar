@@ -1,105 +1,8 @@
 import React, { useState } from 'react';
 import './Calendar.css'
-
-function adjustedMonth(month) {
-    if (month < 0)
-        month += 12
-    else if (month > 11)
-        month -= 12
-    return month
-}
-
-function calendarDaysJS(dateForMonth) {
-    const days = []
-    const tempDate = new Date(dateForMonth.getTime())
-    tempDate.setDate(1)
-    tempDate.setDate(1 - tempDate.getDay())
-    for (let i = 1; i <= 42; i++) {
-        days[i] = { day: tempDate.getDate(), month: tempDate.getMonth(), year: tempDate.getFullYear() }
-        tempDate.setDate(tempDate.getDate() + 1)
-    }
-    return days
-}
-
-function dateClass(item, month, today, events, selectedDate) {
-    let className = item.month === month ? "active-day" : "inactive-day"
-
-    if (item.day === today.getDate() && item.month === today.getMonth() && item.year === today.getFullYear()) {
-        className += " current"
-    }
-
-    if (events.find(event => item.day === event.startTime.getDate() && item.month === event.startTime.getMonth())) {
-        className += " events"
-    }
-
-    if (item.day === selectedDate.getDate() && item.month === selectedDate.getMonth() && item.year === selectedDate.getFullYear()) {
-        className += " selected"
-    }
-
-    return className
-}
-
-const toggleModal = (modalActive, setModalActive) => {
-    setModalActive(!modalActive)
-}
-
-const changeMonth = (number, dateForMonth, setDateForMonth) => {
-    const newDate = new Date(dateForMonth.getTime())
-    newDate.setMonth(dateForMonth.getMonth() + number, 1)
-    setDateForMonth(newDate)
-}
-
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-// const fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-// const fullDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-function eventModal(modalActive, setModalActive, handleSubmit, handleInputChange, inputs) {
-    return (
-        <div id="eventModal" className={"modal-active"}>
-            <div className="modal-content">
-
-                <span className="close" onClick={() => toggleModal(modalActive, setModalActive)}>&times;</span>
-                <div className="modal-form">
-                    <span className="modal-title">New Event</span>
-                    <form onSubmit={handleSubmit}>
-
-                        <div><label>Title:</label>
-                            <input type="text" name="title" onChange={handleInputChange} value={inputs.title} required />
-
-                        </div>
-                        <div>
-                            <label>Start Date: </label>
-                            <input name="startDate" type="date" onChange={handleInputChange} value={inputs.startDate} required />
-
-                        </div>
-                        <div><label>Begins:  </label>
-                            <input name="startTime" type="time" onChange={handleInputChange} value={inputs.startTime} required />
-
-                        </div>
-                        {/* <div><label>People:</label>
-                            <input type="text" name="people" />
-
-                        </div>
-                        <div><label>Location:</label>
-                            <input type="text" name="location" />
-
-                        </div>
-                        <div><label>Description: </label>
-                            <input type="text" name="description" />
-
-                        </div> */}
-                        <button>Add Event</button>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-    )
-}
+import useEventForm from '../hooks/eventForm'
+import { adjustedMonth, calendarDaysJS, dateClass, toggleModal, changeMonth, months, days } from '../utils'
+import EventModal from './EventModal'
 
 const sampleEvents = [
     { title: "Goat yoga", startTime: new Date(Date.UTC(2020, 4, 18, 14, 0, 0)), people: "Soren", location: "The Office", description: "I'm not sure what's happening, but I like it." },
@@ -107,47 +10,6 @@ const sampleEvents = [
     { title: "Tee time", startTime: new Date(Date.UTC(2020, 5, 9, 11, 30, 0)), people: "Marge", location: "The Office", description: "I'm not sure what's happening, but I like it." },
     { title: "Meet with plumber", startTime: new Date(Date.UTC(2020, 5, 9, 18, 0, 0)), people: "Sam", location: "The Office", description: "I'm not sure what's happening, but I like it." }, { title: "Date with Adele", startTime: new Date(Date.UTC(2020, 5, 9, 23, 30, 0)), people: "Michael", location: "The Office", description: "I'm not sure what's happening, but I like it." }
 ]
-
-const useEventForm = (callback) => {
-    const [inputs, setInputs] = useState({ title: "", startTime: "", startDate: "" });
-
-    const handleSubmit = (event) => {
-        if (event) {
-            event.preventDefault();
-        }
-        callback()
-    }
-
-    const handleInputChange = (event) => {
-        event.persist();
-        setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
-    }
-
-    return {
-        handleSubmit,
-        handleInputChange,
-        inputs
-    };
-}
-
-// const useInput = initialValue => {
-//     const [value, setValue] = useState(initialValue);
-
-//     return {
-//         value,
-//         setValue,
-//         reset: () => setValue(""),
-//         bind: {
-//             value,
-//             onChange: event => {
-//                 setValue(event.target.value);
-//             }
-//         }
-//     };
-// };
-
-/*********** */
-/*********** */
 
 export function Calendar() {
     const today = new Date();
@@ -211,7 +73,7 @@ export function Calendar() {
                 </div>
                 <div className="event-create text-button" onClick={() => toggleModal(modalActive, setModalActive)}>+</div>
             </div>
-            {modalActive && eventModal(modalActive, setModalActive, handleSubmit, handleInputChange, inputs)}
+            {modalActive && <EventModal modalActive={modalActive} setModalActive={setModalActive} handleSubmit={handleSubmit} handleInputChange={handleInputChange} inputs={inputs} />}
         </div >
     )
 }
