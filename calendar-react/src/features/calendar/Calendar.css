@@ -15,6 +15,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: var(--main-font-size);
+  background-color: var(--white);
 }
 
 .section {
@@ -24,16 +25,19 @@ body {
   width: 100vw;
 }
 
-@media (max-width: 559px) {
+@media (max-width: 680px) {
   .section {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
   }
+  .calendar-dates > div > span:first-child {
+    min-height: 5vh;
+  }
 }
 
-@media (min-width: 600px) {
-  .calendar-dates > div {
+@media (min-width: 680px) {
+  .calendar-dates > div > span:first-child {
     min-height: 8vh;
   }
 }
@@ -89,8 +93,12 @@ body {
 
 .calendar-dates > div > span:first-child {
   flex: 1;
-  padding: 1 5px 0;
-  margin: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* padding: 1px 5px 0; */
+  margin: 2px;
+  /* min-height: 8vh; */
 }
 
 .calendar-dates > div.selected {
@@ -145,10 +153,7 @@ div.events > span:first-child {
 }
 
 .event-box {
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.8),
-      rgba(0, 0, 0, 0.5)
-    ),
+  background-image: linear-gradient(rgba(252, 252, 252, 1), rgba(0, 0, 0, 0.5)),
     url("./images/sean-o-KMn4VEeEPR8-unsplash.jpg");
   flex: 1;
   display: flex;

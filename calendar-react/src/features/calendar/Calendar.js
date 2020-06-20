@@ -57,7 +57,7 @@ const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 // const fullDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-function eventModal(modalActive, setModalActive) {
+function eventModal(modalActive, setModalActive, handleSubmit, handleInputChange, inputs) {
     return (
         <div id="eventModal" className={"modal-active"}>
             <div className="modal-content">
@@ -65,22 +65,22 @@ function eventModal(modalActive, setModalActive) {
                 <span className="close" onClick={() => toggleModal(modalActive, setModalActive)}>&times;</span>
                 <div className="modal-form">
                     <span className="modal-title">New Event</span>
-                    <form >
+                    <form onSubmit={handleSubmit}>
 
                         <div><label>Title:</label>
-                            <input type="text" name="title" />
+                            <input type="text" name="title" onChange={handleInputChange} value={inputs.title} required />
 
                         </div>
                         <div>
                             <label>Start Date: </label>
-                            <input name="startdate" type="date" />
+                            <input name="startDate" type="date" onChange={handleInputChange} value={inputs.startDate} required />
 
                         </div>
                         <div><label>Begins:  </label>
-                            <input name="begins" type="time" />
+                            <input name="startTime" type="time" onChange={handleInputChange} value={inputs.startTime} required />
 
                         </div>
-                        <div><label>People:</label>
+                        {/* <div><label>People:</label>
                             <input type="text" name="people" />
 
                         </div>
@@ -91,7 +91,7 @@ function eventModal(modalActive, setModalActive) {
                         <div><label>Description: </label>
                             <input type="text" name="description" />
 
-                        </div>
+                        </div> */}
                         <button>Add Event</button>
                     </form>
                 </div>
@@ -102,33 +102,33 @@ function eventModal(modalActive, setModalActive) {
 }
 
 const sampleEvents = [
-    { title: "Goat yoga", startTime: new Date(Date.UTC(2020, 5, 9, 14, 0, 0)), people: "Soren", location: "The Office", description: "I'm not sure what's happening, but I like it." },
+    { title: "Goat yoga", startTime: new Date(Date.UTC(2020, 4, 18, 14, 0, 0)), people: "Soren", location: "The Office", description: "I'm not sure what's happening, but I like it." },
     { title: "Dental Cleaning", startTime: new Date(Date.UTC(2020, 5, 14, 16, 0, 0)), people: "Adele", location: "The Office", description: "I'm not sure what's happening, but I like it." },
-    { title: "Tee time", startTime: new Date(Date.UTC(2020, 4, 18, 11, 30, 0)), people: "Marge", location: "The Office", description: "I'm not sure what's happening, but I like it." },
-    { title: "Meet with plumber", startTime: new Date(Date.UTC(2020, 4, 18, 18, 0, 0)), people: "Sam", location: "The Office", description: "I'm not sure what's happening, but I like it." }, { title: "Date with Adele", startTime: new Date(Date.UTC(2020, 4, 18, 23, 30, 0)), people: "Michael", location: "The Office", description: "I'm not sure what's happening, but I like it." }
+    { title: "Tee time", startTime: new Date(Date.UTC(2020, 5, 9, 11, 30, 0)), people: "Marge", location: "The Office", description: "I'm not sure what's happening, but I like it." },
+    { title: "Meet with plumber", startTime: new Date(Date.UTC(2020, 5, 9, 18, 0, 0)), people: "Sam", location: "The Office", description: "I'm not sure what's happening, but I like it." }, { title: "Date with Adele", startTime: new Date(Date.UTC(2020, 5, 9, 23, 30, 0)), people: "Michael", location: "The Office", description: "I'm not sure what's happening, but I like it." }
 ]
 
-// const useEventForm = (callback) => {
-//     const [inputs, setInputs] = useState({});
+const useEventForm = (callback) => {
+    const [inputs, setInputs] = useState({ title: "", startTime: "", startDate: "" });
 
-//     const handleSubmit = (event) => {
-//         if (event) {
-//             event.preventDefault();
-//         }
-//         callback();
-//     }
+    const handleSubmit = (event) => {
+        if (event) {
+            event.preventDefault();
+        }
+        callback()
+    }
 
-//     const handleInputChange = (event) => {
-//         event.persist();
-//         setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
-//     }
+    const handleInputChange = (event) => {
+        event.persist();
+        setInputs(inputs => ({ ...inputs, [event.target.name]: event.target.value }));
+    }
 
-//     return {
-//         handleSubmit,
-//         handleInputChange,
-//         inputs
-//     };
-// }
+    return {
+        handleSubmit,
+        handleInputChange,
+        inputs
+    };
+}
 
 // const useInput = initialValue => {
 //     const [value, setValue] = useState(initialValue);
@@ -152,12 +152,18 @@ export function Calendar() {
     const [modalActive, setModalActive] = useState(false);
     const [dateForMonth, setDateForMonth] = useState(new Date(today.getTime()))
     const [selectedDate, setSelectedDate] = useState(new Date(today.getTime()))
+    const [events, setEvents] = useState(sampleEvents)
+    const currentMonthEvents = events.filter(event => event.startTime.toLocaleDateString([], { year: 'numeric', month: '2-digit' }) === dateForMonth.toLocaleDateString([], { year: 'numeric', month: '2-digit' }))
 
-    const events = sampleEvents.filter(event => event.startTime.toLocaleDateString([], { year: 'numeric', month: '2-digit' }) === dateForMonth.toLocaleDateString([], { year: 'numeric', month: '2-digit' }))
+    const addEvent = () => {
+        setEvents([...events, { title: inputs.title, startTime: new Date(inputs.startDate + 'T' + inputs.startTime) }])
+        setModalActive(false)
+    }
 
-    const selectedDayEvents = events.filter(event => event.startTime.toLocaleDateString() === selectedDate.toLocaleDateString())
+    const { handleSubmit, handleInputChange, inputs } = useEventForm(addEvent);
+
+    const selectedDayEvents = currentMonthEvents.filter(event => event.startTime.toLocaleDateString() === selectedDate.toLocaleDateString())
     const month = dateForMonth.getMonth();
-    // const { value, bind, reset } = useInput('');
 
     return (
         <div className="section">
@@ -181,7 +187,7 @@ export function Calendar() {
                             {days.map(day => <span key={day}>{day}</span>)}
                         </div>
                         <div className="calendar-dates">
-                            {calendarDaysJS(dateForMonth).map(item => <div key={item.month + ' ' + item.day} className={dateClass(item, month, today, events, selectedDate)} onClick={() => setSelectedDate(new Date(item.year, item.month, item.day))}>
+                            {calendarDaysJS(dateForMonth).map(item => <div key={item.month + ' ' + item.day} className={dateClass(item, month, today, currentMonthEvents, selectedDate)} onClick={() => setSelectedDate(new Date(item.year, item.month, item.day))}>
                                 <span>{item.day}</span>
                                 <span></span>
                             </div>)}
@@ -202,7 +208,7 @@ export function Calendar() {
                 </div>
                 <div className="event-create text-button" onClick={() => toggleModal(modalActive, setModalActive)}>+</div>
             </div>
-            {modalActive && eventModal(modalActive, setModalActive)}
+            {modalActive && eventModal(modalActive, setModalActive, handleSubmit, handleInputChange, inputs)}
         </div >
     )
 }
