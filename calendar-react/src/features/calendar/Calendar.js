@@ -146,6 +146,9 @@ const useEventForm = (callback) => {
 //     };
 // };
 
+/*********** */
+/*********** */
+
 export function Calendar() {
     const today = new Date();
 
@@ -156,7 +159,7 @@ export function Calendar() {
     const currentMonthEvents = events.filter(event => event.startTime.toLocaleDateString([], { year: 'numeric', month: '2-digit' }) === dateForMonth.toLocaleDateString([], { year: 'numeric', month: '2-digit' }))
 
     const addEvent = () => {
-        setEvents([...events, { title: inputs.title, startTime: new Date(inputs.startDate + 'T' + inputs.startTime) }])
+        setEvents([...events, { title: inputs.title, startTime: new Date(inputs.startDate.substring(0, 4), inputs.startDate.substring(5, 7) - 1, inputs.startDate.substring(8, 10), inputs.startTime.substring(0, 2), inputs.startTime.substring(3, 5)) }])
         setModalActive(false)
     }
 

@@ -18,3 +18,7 @@
 - Create Node Server
   - `npx express-generator calendar-api --no-view`
 - Basic Calendar view
+
+## Notes
+
+- Custom hooks for forms: https://medium.com/@geeky_writer_/using-react-hooks-to-create-awesome-forms-6f846a4ce57
