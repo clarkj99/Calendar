@@ -12,31 +12,33 @@ function EventModal(props) {
                     <span className="modal-title">New Event</span>
                     <form onSubmit={handleSubmit}>
 
-                        <div><label>Title:</label>
+                        <div>
+                            <label>Title:</label>
                             <input type="text" name="title" onChange={handleInputChange} value={inputs.title} required />
 
                         </div>
                         <div>
-                            <label>Start Date: </label>
-                            <input name="startDate" type="date" onChange={handleInputChange} value={inputs.startDate} required />
+                            <div>
+                                <label>Start Date: </label>
+                                <input name="startDate" type="date" onChange={handleInputChange} value={inputs.startDate} required />
 
+                            </div>
+                            <div><label>Time:  </label>
+                                <input name="startTime" type="time" onChange={handleInputChange} value={inputs.startTime} required />
+
+                            </div>
                         </div>
-                        <div><label>Begins:  </label>
-                            <input name="startTime" type="time" onChange={handleInputChange} value={inputs.startTime} required />
+                        <div>
+                            <div>
+                                <label>End Date: </label>
+                                <input name="endDate" type="date" onChange={handleInputChange} value={inputs.endDate} required />
 
+                            </div>
+                            <div><label>Time:  </label>
+                                <input name="endTime" type="time" onChange={handleInputChange} value={inputs.endTime} required />
+
+                            </div>
                         </div>
-                        {/* <div><label>People:</label>
-                            <input type="text" name="people" />
-
-                        </div>
-                        <div><label>Location:</label>
-                            <input type="text" name="location" />
-
-                        </div>
-                        <div><label>Description: </label>
-                            <input type="text" name="description" />
-
-                        </div> */}
                         <button>Add Event</button>
                     </form>
                 </div>

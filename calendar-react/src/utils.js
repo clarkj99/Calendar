@@ -46,6 +46,14 @@ export const changeMonth = (number, dateForMonth, setDateForMonth) => {
     setDateForMonth(newDate)
 }
 
+export function stringToDate(startDate, startTime) {
+    return new Date(startDate.substring(0, 4), startDate.substring(5, 7) - 1, startDate.substring(8, 10), startTime.substring(0, 2), startTime.substring(3, 5))
+}
+
+export function localTimeString(time) {
+    return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+}
+
 export const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 export const fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

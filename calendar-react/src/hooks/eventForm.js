@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-const useEventForm = (updateState) => {
-    const initialState = { title: "", startTime: "", startDate: "" }
+const useEventForm = (initialState, updateState) => {
     const [inputs, setInputs] = useState({ ...initialState });
 
     const handleSubmit = (event) => {

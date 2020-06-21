@@ -249,16 +249,15 @@ div.events > span:first-child {
 }
 
 .modal-content {
-  max-width: 420px;
+  max-width: 460px;
   background-color: var(--white);
   margin: 15% auto;
   padding: 20px;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 85%;
   border-radius: 5px;
   display: flex;
   flex-direction: row-reverse;
   box-shadow: 3px 6px 12px #00000080;
-  /* color: #fff; */
 }
 
 .close {
@@ -305,20 +304,30 @@ form {
   font-size: var(--smaller-font-size);
 }
 
-form div {
+form > div {
   display: flex;
-  margin-bottom: 5px;
+  padding-bottom: 15px;
+  justify-content: space-evenly;
 }
 
-form label {
+form div > label:only-of-type {
   flex: 1;
   text-align: left;
 }
-form input {
-  flex: 2;
+
+form div input {
+  flex: 1;
   border-radius: 6px;
   border: 1px solid var(--primary);
 }
+
+form div input:only-of-type {
+  flex: 5;
+  border-radius: 6px;
+  border: 1px solid var(--primary);
+  margin: 0 15px 0 3px;
+}
+
 button {
   background-color: var(--secondary);
   border: 3px solid var(--secondary);
