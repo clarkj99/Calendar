@@ -1,13 +1,18 @@
-# Calendar
+# eCalendar
 
 ## Overview
 
 - Originally developed as a solo project for Chingu Voyage 21.
-- Implemented with React/Redux and Node/Express
+- Frontend implemented with React
+- Backend implemented in Node.js (WIP)
 
 ## Features
 
 ## Setup
+
+- clone this repository
+- cd to `calendar-react` directory
+- `yarn start`
 
 ## Dependencies
 

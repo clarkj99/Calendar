@@ -279,6 +279,9 @@ div.events > span:first-child {
   color: var(--secondary);
   font-weight: bold;
 }
+.text-button.event-create {
+  text-align: center;
+}
 
 .text-button:hover {
   color: var(--primary);
@@ -288,15 +291,15 @@ div.events > span:first-child {
 
 div.modal-form {
   flex: 11;
-}
-div.modal-form button {
-  margin: 15px 0 0;
+  display: flex;
+  flex-direction: column;
 }
 
 span.modal-title {
   font-size: var(--larger-font-size);
   /* font-weight: bold; */
   text-transform: uppercase;
+  text-align: center;
 }
 
 form {
@@ -329,14 +332,22 @@ form div input:only-of-type {
 }
 
 button {
+  margin: 15px 0 0;
+  text-align: center;
   background-color: var(--secondary);
   border: 3px solid var(--secondary);
   border-radius: 9px;
   color: var(--white);
+  font-size: var(--larger-font-size);
+  font-weight: bold;
 }
 
 button:hover {
   background-color: var(--primary);
   border: 3px solid var(--primary);
   color: #fff;
+}
+.button {
+  display: flex;
+  justify-content: center;
 }

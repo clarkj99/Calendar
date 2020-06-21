@@ -1,3 +1,5 @@
+/** Helper Functions and Constants */
+
 export function adjustedMonth(month) {
     if (month < 0)
         month += 12

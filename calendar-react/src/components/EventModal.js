@@ -39,7 +39,9 @@ function EventModal(props) {
 
                             </div>
                         </div>
-                        <button>Add Event</button>
+                        <div className="button">
+                            <button>Add Event</button>
+                        </div>
                     </form>
                 </div>
             </div>
