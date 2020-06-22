@@ -6,6 +6,7 @@ While we may be a long way from the practice of using daily organizers produce b
 
 - Originally developed as a solo project for Chingu Voyage 21.
 - Frontend implemented with React
+- Live view: http://ecalendar.dekalbwebdev.com/
 - _(WIP) Backend to be implemented in Node.js_
 
 ## Features
@@ -36,6 +37,9 @@ While we may be a long way from the practice of using daily organizers produce b
 ![iPad Portrait](screenshots/iPadPortrait.png)
 
 ## Dependencies
+
+- No css libraries
+- No javascript libraries
 
 ## TODO
 
