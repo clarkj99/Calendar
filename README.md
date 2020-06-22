@@ -10,10 +10,10 @@ While we may be a long way from the practice of using daily organizers produce b
 
 ## Features
 
-[] User view currrent month
-[] User can scroll forward or backward one month at a time
-[] User can select a day to view events
-[] User can add new events
+[x] User view currrent month
+[x] User can scroll forward or backward one month at a time
+[x] User can select a day to view events
+[x] User can add new events
 
 ## Setup
 
@@ -25,15 +25,21 @@ While we may be a long way from the practice of using daily organizers produce b
 
 ## TODO
 
-[] Create React app
+[x] Create React app
 
-- `npx create-react-app react-redux-express-app --template redux`
-  [] Create Node Server
+- `npx create-react-app calendar-react`
+
+[x] Create Node Server
+
 - `npx express-generator calendar-api --no-view`
-  [] Basic Calendar view
-  [] Event Box scaffold
-  [] Modal Form scaffold
-  [] Add event from modal form
+
+[x] Basic Calendar view
+[x] Event Box scaffold
+[x] Modal Form scaffold
+[x] Add event from modal form
+[ ] Route GET /events
+[ ] Route PUT /event
+[ ] User authentication
 
 ## Notes
 
