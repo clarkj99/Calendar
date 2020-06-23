@@ -6,8 +6,9 @@ function EventModal(props) {
     return (
         <div id="eventModal" className={"modal-active"}>
             <div className="modal-content">
-
-                <span className="close" onClick={() => toggleModal(modalActive, setModalActive)}>&times;</span>
+                <div>
+                    <span className="close" onClick={() => toggleModal(modalActive, setModalActive)}>&times;</span>
+                </div>
                 <div className="modal-form">
                     <span className="modal-title">New Event</span>
                     <form onSubmit={handleSubmit}>

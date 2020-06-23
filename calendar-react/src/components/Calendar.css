@@ -265,7 +265,7 @@ div.events > span:first-child {
   font-size: var(--largest-font-size);
   font-weight: bold;
   flex: 1;
-  margin: -15px -15px 0 0;
+  padding: -15px -15px 0 0;
 }
 
 .close:hover,
