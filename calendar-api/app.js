@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const eventsRouter = require('./routes/events');
 
 const app = express();
 const port = 9000;
@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/events', eventsRouter);
 
 app.listen(port, () => console.log(`Calendar app listening at http://localhost:${port}`))
 

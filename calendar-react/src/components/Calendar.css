@@ -251,7 +251,7 @@ div.events > span:first-child {
 .modal-content {
   max-width: 460px;
   background-color: var(--white);
-  margin: 15% auto;
+  margin: 10% 0 0;
   padding: 20px;
   width: 85%;
   border-radius: 5px;
@@ -293,6 +293,7 @@ div.modal-form {
   flex: 11;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 span.modal-title {
@@ -348,6 +349,6 @@ button:hover {
   color: #fff;
 }
 .button {
-  display: flex;
-  justify-content: center;
+  /* display: flex; */
+  /* justify-content: center; */
 }
