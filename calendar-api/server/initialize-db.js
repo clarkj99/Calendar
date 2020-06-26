@@ -5,7 +5,6 @@ async function initializeDB() {
     const db = await connectDB()
     for (let collectionName in initialEvents) {
         let collection = db.collection(collectionName)
-        console.log(collectionName)
         await collection.insertMany(initialEvents[collectionName])
     }
 
