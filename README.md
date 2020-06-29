@@ -24,17 +24,7 @@ While we may be a long way from the practice of using daily organizers produce b
 
 ## Screenshots
 
-### iPhone
-
-![iPhone Landscape](screenshots/iPhoneLandscape.png)
-
-![iPhone Portrait](screenshots/iPhonePortrait.png)
-
-### iPad
-
-![iPad Landscape](screenshots/iPadLandscape.png)
-
-![iPad Portrait](screenshots/iPadPortrait.png)
+![Screenshots](screenshots/calendar.gif)
 
 ## Dependencies
 
