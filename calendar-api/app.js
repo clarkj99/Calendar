@@ -1,4 +1,6 @@
 const express = require('express');
+const dotenv = require('dotenv').config();
+const cors = require('cors')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -7,9 +9,11 @@ const indexRouter = require('./routes/index');
 const eventsRouter = require('./routes/events');
 
 const app = express();
-const port = 9000;
 
+const port = process.env.PORT || 9000;
+app.use(cors())
 app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

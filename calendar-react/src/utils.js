@@ -27,7 +27,7 @@ export function dateClass(item, month, today, events, selectedDate) {
         className += " current"
     }
 
-    if (events.find(event => item.day === event.startTime.getDate() && item.month === event.startTime.getMonth())) {
+    if (events.find(event => item.day === new Date(event.startTime).getDate() && item.month === new Date(event.startTime).getMonth())) {
         className += " events"
     }
 
@@ -53,7 +53,7 @@ export function stringToDate(startDate, startTime) {
 }
 
 export function localTimeString(time) {
-    return time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+    return new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 }
 
 export const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
