@@ -17,7 +17,8 @@ export function Calendar() {
 
 
     const fetchEvents = async () => {
-        const result = await fetch("http://localhost:9000/events");
+        // const result = await fetch("http://localhost:9000/events");
+        const result = await fetch("https://fierce-beach-36013.herokuapp.com/events");
         result
             .json()
             .then(data => {
