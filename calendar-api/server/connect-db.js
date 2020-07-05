@@ -1,5 +1,6 @@
 const MongoClient = require('mongodb').MongoClient
-const url = 'mongodb://localhost:27018/calendar'
+const url = process.env.MONGODB_URI || 'mongodb://localhost:27018/calendar'
+
 let db = null;
 
 async function connectDB() {
